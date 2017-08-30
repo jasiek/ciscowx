@@ -1,6 +1,13 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
+	"package": [
+		{
+			"checksumSHA1": "mfFJ6aryVfGOmX7VA6srwig6c1A=",
+			"path": "github.com/abh/geoip",
+			"revision": "07cea4480daa3f28edd2856f2a0490fbe83842eb",
+			"revisionTime": "2016-05-10T15:55:16Z"
+		}
+	],
 	"rootPath": "ciscowx"
 }
