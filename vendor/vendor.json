@@ -7,6 +7,12 @@
 			"path": "github.com/abh/geoip",
 			"revision": "07cea4480daa3f28edd2856f2a0490fbe83842eb",
 			"revisionTime": "2016-05-10T15:55:16Z"
+		},
+		{
+			"checksumSHA1": "EmbEwt1kctyV4Kwm5WT7/1C7dHg=",
+			"path": "github.com/alsm/forecastio",
+			"revision": "396752e8216a095ff1b4abd8426e1f5f25cd33d9",
+			"revisionTime": "2017-03-19T15:33:36Z"
 		}
 	],
 	"rootPath": "ciscowx"
