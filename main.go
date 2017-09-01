@@ -14,6 +14,10 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 				Name: "Weather",
 				URL: "/wx",
 			},
+			MenuItem{
+				Name: "Available funds",
+				URL: "/funds",
+			},
 		},
 	}
 	bytes, _ := xml.Marshal(x)
@@ -28,6 +32,7 @@ func contentTypeXml(next http.Handler) http.Handler {
 }
 
 func main() {
+	http.Handle("/funds", contentTypeXml(MakeFundsHandler()))
 	http.Handle("/wx", contentTypeXml(MakeWxRootHandler()))
 	http.Handle("/wx/", contentTypeXml(MakeWxHandler()))
 	http.Handle("/", contentTypeXml(http.HandlerFunc(rootHandler)))
