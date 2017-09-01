@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "HeAOIQS+TI75+Afm0qgKXdg+37I=",
+			"path": "github.com/PuerkitoBio/goquery",
+			"revision": "ce645ea5e67a713599b7415f21f0786451fa9554",
+			"revisionTime": "2017-08-16T13:38:31Z"
+		},
+		{
 			"checksumSHA1": "mfFJ6aryVfGOmX7VA6srwig6c1A=",
 			"path": "github.com/abh/geoip",
 			"revision": "07cea4480daa3f28edd2856f2a0490fbe83842eb",
@@ -13,6 +19,60 @@
 			"path": "github.com/alsm/forecastio",
 			"revision": "396752e8216a095ff1b4abd8426e1f5f25cd33d9",
 			"revisionTime": "2017-03-19T15:33:36Z"
+		},
+		{
+			"checksumSHA1": "2rWSos1D+xqNSGkvEMOG3pntod8=",
+			"path": "github.com/andybalholm/cascadia",
+			"revision": "349dd0209470eabd9514242c688c403c0926d266",
+			"revisionTime": "2016-12-24T14:14:13Z"
+		},
+		{
+			"checksumSHA1": "+EQ7D33IDpeetHCiqKwdv767pvY=",
+			"path": "github.com/headzoo/surf/agent",
+			"revision": "e706cee1c794a01f7133dbeb97dcbbd9c98ae84e",
+			"revisionTime": "2017-08-05T09:36:30Z"
+		},
+		{
+			"checksumSHA1": "GtgOguYIjDZbAt+yhmY6WFoTSdg=",
+			"path": "github.com/headzoo/surf/browser",
+			"revision": "e706cee1c794a01f7133dbeb97dcbbd9c98ae84e",
+			"revisionTime": "2017-08-05T09:36:30Z"
+		},
+		{
+			"checksumSHA1": "hRnSyUe+i0ALGC+YBWyTYT04gR4=",
+			"path": "github.com/headzoo/surf/errors",
+			"revision": "e706cee1c794a01f7133dbeb97dcbbd9c98ae84e",
+			"revisionTime": "2017-08-05T09:36:30Z"
+		},
+		{
+			"checksumSHA1": "1rvqZZuhpwVudoMjyYSlwF5/5bU=",
+			"path": "github.com/headzoo/surf/jar",
+			"revision": "e706cee1c794a01f7133dbeb97dcbbd9c98ae84e",
+			"revisionTime": "2017-08-05T09:36:30Z"
+		},
+		{
+			"checksumSHA1": "uczU4npsD9cPr1/P1eNe7A+0Zxs=",
+			"path": "github.com/headzoo/surf/util",
+			"revision": "e706cee1c794a01f7133dbeb97dcbbd9c98ae84e",
+			"revisionTime": "2017-08-05T09:36:30Z"
+		},
+		{
+			"checksumSHA1": "vqc3a+oTUGX8PmD0TS+qQ7gmN8I=",
+			"path": "golang.org/x/net/html",
+			"revision": "66aacef3dd8a676686c7ae3716979581e8b03c47",
+			"revisionTime": "2016-09-14T00:11:54Z"
+		},
+		{
+			"checksumSHA1": "00eQaGynDYrv3tL+C7l9xH0IDZg=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "66aacef3dd8a676686c7ae3716979581e8b03c47",
+			"revisionTime": "2016-09-14T00:11:54Z"
+		},
+		{
+			"checksumSHA1": "nQ6uqhOagYJSsuGs8GktgQVQohQ=",
+			"path": "gopkg.in/headzoo/surf.v1",
+			"revision": "60198774ccce43e1d26c80e961497b7d262460b3",
+			"revisionTime": "2017-07-29T03:24:32Z"
 		}
 	],
 	"rootPath": "ciscowx"
