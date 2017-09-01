@@ -3,18 +3,21 @@ package main
 import (
 	"net/http"
 	"encoding/xml"
+	"ciscowx/ciscoxml"
+	"ciscowx/funds"
+	"ciscowx/weather"
 )
 
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	x := CiscoIPPhoneMenu{
+	x := ciscoxml.CiscoIPPhoneMenu{
 		Title: "Exciting services",
-		MenuItem: []MenuItem{
-			MenuItem{
+		MenuItem: []ciscoxml.MenuItem{
+			ciscoxml.MenuItem{
 				Name: "Weather",
 				URL: "/wx",
 			},
-			MenuItem{
+			ciscoxml.MenuItem{
 				Name: "Available funds",
 				URL: "/funds",
 			},
@@ -32,9 +35,9 @@ func contentTypeXml(next http.Handler) http.Handler {
 }
 
 func main() {
-	http.Handle("/funds", contentTypeXml(MakeFundsHandler()))
-	http.Handle("/wx", contentTypeXml(MakeWxRootHandler()))
-	http.Handle("/wx/", contentTypeXml(MakeWxHandler()))
+	http.Handle("/funds", contentTypeXml(funds.MakeFundsHandler()))
+	http.Handle("/wx", contentTypeXml(weather.MakeWxRootHandler()))
+	http.Handle("/wx/", contentTypeXml(weather.MakeWxHandler()))
 	http.Handle("/", contentTypeXml(http.HandlerFunc(rootHandler)))
 	http.ListenAndServe("0.0.0.0:8080", nil)
 }

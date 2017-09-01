@@ -1,12 +1,13 @@
-package main
+package funds
 
 import (
 	"gopkg.in/headzoo/surf.v1"
+	"github.com/headzoo/surf/browser"
 	"os"
 	"regexp"
-	"github.com/headzoo/surf/browser"
 	"net/http"
 	"encoding/xml"
+	"ciscowx/ciscoxml"
 )
 
 func authenticate() (s *browser.Browser) {
@@ -29,7 +30,7 @@ func getFunds(s *browser.Browser) string {
 func MakeFundsHandler() http.Handler {
 	s := authenticate()
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		x := CiscoIPPhoneText{
+		x := ciscoxml.CiscoIPPhoneText{
 			Title: "Available funds",
 			Text: getFunds(s) + " PLN",
 		}

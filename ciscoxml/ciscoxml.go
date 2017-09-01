@@ -1,4 +1,4 @@
-package main
+package ciscoxml
 
 type MenuItem struct {
 	Name string
