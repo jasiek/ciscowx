@@ -1,15 +1,16 @@
 package weather
 
 import (
-	"net/http"
 	"encoding/xml"
+	"fmt"
+	"net/http"
+	"regexp"
+	"time"
+
 	"github.com/abh/geoip"
 	"github.com/alsm/forecastio"
-	"time"
-	"regexp"
-	"fmt"
-	"ciscowx/cache"
-	"ciscowx/ciscoxml"
+	"github.com/jasiek/ciscowx/cache"
+	"github.com/jasiek/ciscowx/ciscoxml"
 )
 
 var cacheStore = cache.NewCache()
@@ -24,7 +25,7 @@ func forecastHandler(latitude float32, longitude float32, date string) http.Hand
 		apiKey := r.Context().Value("FORECASTIO_KEY").(string)
 		connection := forecastio.NewConnection(apiKey)
 
-		var ff = func(lat float64, lng float64) (*forecastio.Forecast){
+		var ff = func(lat float64, lng float64) *forecastio.Forecast {
 			forecast, _ := connection.Forecast(lat, lng, []string{}, false)
 			return forecast
 		}
@@ -46,7 +47,7 @@ func forecastHandler(latitude float32, longitude float32, date string) http.Hand
 
 		x := ciscoxml.CiscoIPPhoneText{
 			Title: "WX for " + date,
-			Text: text,
+			Text:  text,
 		}
 
 		bytes, _ := xml.Marshal(x)
@@ -74,7 +75,7 @@ func wxRootHandler(w http.ResponseWriter, r *http.Request) {
 		MenuItem: []ciscoxml.MenuItem{
 			ciscoxml.MenuItem{
 				Name: city + " today",
-				URL: "/wx/" + time.Now().Format("2006-01-02"),
+				URL:  "/wx/" + time.Now().Format("2006-01-02"),
 			},
 		},
 	}
@@ -86,7 +87,7 @@ func wxRootHandler(w http.ResponseWriter, r *http.Request) {
 		formattedDate := date.Format("2006-01-02")
 		item := ciscoxml.MenuItem{
 			Name: city + " " + formattedDate,
-			URL: "/wx/" + formattedDate,
+			URL:  "/wx/" + formattedDate,
 		}
 		x.MenuItem = append(x.MenuItem, item)
 	}

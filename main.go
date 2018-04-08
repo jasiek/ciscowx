@@ -1,18 +1,27 @@
 package main
 
 import (
-	"net/http"
-	"encoding/xml"
-	"ciscowx/ciscoxml"
-	"ciscowx/funds"
-	"ciscowx/weather"
-	"os"
 	"context"
-	"github.com/abh/geoip"
+	"encoding/xml"
+	"errors"
 	"net"
+	"net/http"
+	"os"
+
+	"github.com/jasiek/ciscowx/ciscoxml"
+	"github.com/jasiek/ciscowx/funds"
+	"github.com/jasiek/ciscowx/weather"
+
+	"github.com/abh/geoip"
+	"github.com/aws/aws-lambda-go/events"
 )
 
 const ctxGeoipKey = "geoip"
+
+var (
+	// ErrNameNotProvided is thrown when a name is not provided
+	ErrNameNotProvided = errors.New("no name was provided in the HTTP body")
+)
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	x := ciscoxml.CiscoIPPhoneMenu{
@@ -20,11 +29,11 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		MenuItem: []ciscoxml.MenuItem{
 			ciscoxml.MenuItem{
 				Name: "Weather",
-				URL: "/wx",
+				URL:  "/wx",
 			},
 			ciscoxml.MenuItem{
 				Name: "Available funds",
-				URL: "/funds",
+				URL:  "/funds",
 			},
 		},
 	}
@@ -54,7 +63,7 @@ func configurationMiddleware(next http.Handler) http.Handler {
 		panic("EC_PASSWORD is not set")
 	}
 
-	return http.HandlerFunc(func (w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := context.WithValue(r.Context(), "TESTING", testing)
 		ctx = context.WithValue(ctx, "FORECASTIO_KEY", forecastioKey)
 		ctx = context.WithValue(ctx, "EC_USERNAME", ecUsername)
@@ -81,6 +90,13 @@ func geoIpMiddleware(next http.Handler) http.Handler {
 
 func wrap(next http.Handler) http.Handler {
 	return configurationMiddleware(geoIpMiddleware(contentTypeXml(next)))
+}
+
+func awsHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	if len(request.Body) < 1 {
+		return events.APIGatewayProxyResponse{}, ErrNameNotProvided
+	}
+	return events.APIGatewayProxyResponse{}, nil
 }
 
 func main() {
