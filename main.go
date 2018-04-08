@@ -14,6 +14,7 @@ import (
 
 	"github.com/abh/geoip"
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 const ctxGeoipKey = "geoip"
@@ -100,9 +101,14 @@ func awsHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRe
 }
 
 func main() {
-	http.Handle("/funds", wrap(funds.MakeFundsHandler()))
-	http.Handle("/wx", wrap(weather.MakeWxRootHandler()))
-	http.Handle("/wx/", wrap(weather.MakeWxHandler()))
-	http.Handle("/", wrap(http.HandlerFunc(rootHandler)))
-	http.ListenAndServe("0.0.0.0:8080", nil)
+	// Are we running inside of a lambda?
+	if os.Getenv("AWS_EXECUTION_ENV") != "" {
+		lambda.Start(awsHandler)
+	} else {
+		http.Handle("/funds", wrap(funds.MakeFundsHandler()))
+		http.Handle("/wx", wrap(weather.MakeWxRootHandler()))
+		http.Handle("/wx/", wrap(weather.MakeWxHandler()))
+		http.Handle("/", wrap(http.HandlerFunc(rootHandler)))
+		http.ListenAndServe("0.0.0.0:8080", nil)
+	}
 }
